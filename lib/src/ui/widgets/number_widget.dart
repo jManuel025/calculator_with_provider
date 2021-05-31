@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-class NumberButton extends StatelessWidget {
+class Number extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Text('numero'),
+    );
   }
 }
