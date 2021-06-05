@@ -27,6 +27,7 @@ class Palette {
     return MaterialColor(
       0xFFE9E3DB,
       const <int, Color>{
+        50: const Color(0xFFFFFFFF),
         100: const Color(0xFFE9E3DB),
         200: const Color(0xFFB2A497),
       },

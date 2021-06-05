@@ -9,10 +9,13 @@ class Input extends StatelessWidget {
         borderRadius: BorderRadius.circular(15.0),
         child: Container(
           alignment: Alignment.centerRight,
-          padding: EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(32.0),
           width: double.maxFinite,
           color: Theme.of(context).primaryColorDark,
-          child: Text('399,981'),
+          child: Text(
+            '399,981',
+            style: Theme.of(context).textTheme.headline3,
+          ),
         ),
       ),
     );
