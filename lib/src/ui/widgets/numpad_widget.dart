@@ -12,35 +12,78 @@ class Numpad extends StatelessWidget {
           padding: EdgeInsets.all(32.0),
           width: double.maxFinite,
           color: Theme.of(context).primaryColor,
-          child: GridView.count(
-            crossAxisCount: 4,
-            crossAxisSpacing: 16.0,
-            mainAxisSpacing: 16.0,
-            childAspectRatio: .95,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              NumpadKey(
-                keyChar: 'DEL',
-                type: Type.action,
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                runAlignment: WrapAlignment.spaceBetween,
+                runSpacing: 16.0,
+                spacing: 16.0,
+                children: _numpadGrid(),
               ),
-              NumpadKey(),
-              NumpadKey(),
-              NumpadKey(),
-              NumpadKey(),
-              NumpadKey(),
-              NumpadKey(),
-              NumpadKey(),
-              NumpadKey(),
-              NumpadKey(),
-              NumpadKey(),
-              NumpadKey(),
-              NumpadKey(),
-              NumpadKey(),
-              NumpadKey(),
-              NumpadKey(),
             ],
           ),
         ),
       ),
     );
   }
+
+  List<Widget> _numpadGrid() {
+    List<String> chars = [
+      '7',
+      '8',
+      '9',
+      'DEL',
+      '4',
+      '5',
+      '6',
+      '+',
+      '1',
+      '2',
+      '3',
+      '-',
+      '.',
+      '0',
+      '/',
+      'x',
+      'RESET',
+      '='
+    ];
+    return chars
+        .map(
+          (char) => char.length == 1 && char != '='
+              ? NumpadKey(keyChar: '$char')
+              : char == 'DEL'
+                  ? NumpadKey(
+                      keyChar: '$char',
+                      type: Type.action,
+                    )
+                  : char == 'RESET'
+                      ? NumpadKey(
+                          keyChar: '$char',
+                          type: Type.action,
+                          isLarge: true,
+                        )
+                      : NumpadKey(
+                          keyChar: '$char',
+                          type: Type.result,
+                          isLarge: true,
+                        ),
+        )
+        .toList();
+  }
 }
+
+// GridView.count(
+//   crossAxisCount: 4,
+//   crossAxisSpacing: 16.0,
+//   mainAxisSpacing: 16.0,
+//   childAspectRatio: .95,
+//   children: [
+//     NumpadKey(),
+//     NumpadKey(),
+//     NumpadKey(),
+//     NumpadKey(),
+//   ],
+// ),
