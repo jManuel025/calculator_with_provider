@@ -1,23 +1,29 @@
+import 'package:calculator_with_provider/src/provider/NumberInputProvider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Input extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(15.0),
-        child: Container(
-          alignment: Alignment.centerRight,
-          padding: EdgeInsets.all(32.0),
-          width: double.maxFinite,
-          color: Theme.of(context).primaryColorDark,
-          child: Text(
-            '399,981',
-            style: Theme.of(context).textTheme.headline3,
+    return Consumer<NumberInputProvider>(
+      builder: (context, value, _) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15.0),
+            child: Container(
+              alignment: Alignment.centerRight,
+              padding: EdgeInsets.all(32.0),
+              width: double.maxFinite,
+              color: Theme.of(context).primaryColorDark,
+              child: Text(
+                '${value.number}',
+                style: Theme.of(context).textTheme.headline3,
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

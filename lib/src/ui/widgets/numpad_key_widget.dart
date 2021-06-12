@@ -1,5 +1,7 @@
+import 'package:calculator_with_provider/src/provider/NumberInputProvider.dart';
 import 'package:calculator_with_provider/src/utils/Palette.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 enum Type { number, action, result }
 
@@ -23,37 +25,49 @@ class NumpadKey extends StatelessWidget {
       Type.result: Palette.accent[100],
     };
     Size _size = MediaQuery.of(context).size;
-    return Container(
-      width: ((_size.width - 48) / (isLarge ? 2 : 4)) - (isLarge ? 32 : 24),
-      height: 70,
-      child: Stack(
-        children: [
-          Container(
-            decoration: ShapeDecoration(
-              color: shadowColor[type],
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
+    return Consumer<NumberInputProvider>(
+      builder: (context, value, _) {
+        return GestureDetector(
+          onTap: () => _writeNumber(keyChar, value),
+          child: Container(
+            width:
+                ((_size.width - 48) / (isLarge ? 2 : 4)) - (isLarge ? 32 : 24),
+            height: 70,
+            child: Stack(
+              children: [
+                Container(
+                  decoration: ShapeDecoration(
+                    color: shadowColor[type],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 5.0),
+                  alignment: Alignment.center,
+                  decoration: ShapeDecoration(
+                    color: lightColor[type],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  child: Text(
+                    keyChar,
+                    style: type == Type.number
+                        ? Theme.of(context).textTheme.headline5
+                        : Theme.of(context).textTheme.headline6,
+                  ),
+                )
+              ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(bottom: 5.0),
-            alignment: Alignment.center,
-            decoration: ShapeDecoration(
-              color: lightColor[type],
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
-            child: Text(
-              keyChar,
-              style: type == Type.number
-                  ? Theme.of(context).textTheme.headline5
-                  : Theme.of(context).textTheme.headline6,
-            ),
-          )
-        ],
-      ),
+        );
+      },
     );
+  }
+
+  void _writeNumber(String key, NumberInputProvider value) {
+    value.number = int.parse(key);
   }
 }
