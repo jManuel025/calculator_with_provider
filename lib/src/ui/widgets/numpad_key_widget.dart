@@ -28,7 +28,7 @@ class NumpadKey extends StatelessWidget {
     return Consumer<NumberInputProvider>(
       builder: (context, value, _) {
         return GestureDetector(
-          onTap: () => _writeNumber(keyChar, value),
+          onTap: () => _writeChar(keyChar, value, type),
           child: Container(
             width:
                 ((_size.width - 48) / (isLarge ? 2 : 4)) - (isLarge ? 32 : 24),
@@ -67,7 +67,7 @@ class NumpadKey extends StatelessWidget {
     );
   }
 
-  void _writeNumber(String key, NumberInputProvider value) {
-    value.number = int.parse(key);
+  void _writeChar(String key, NumberInputProvider value, Type type) {
+    value.number = key;
   }
 }
