@@ -6,7 +6,7 @@ class Input extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<NumberInputProvider>(
-      builder: (context, value, _) {
+      builder: (context, number, _) {
         return Padding(
           padding: const EdgeInsets.all(16.0),
           child: ClipRRect(
@@ -17,7 +17,7 @@ class Input extends StatelessWidget {
               width: double.maxFinite,
               color: Theme.of(context).primaryColorDark,
               child: Text(
-                '${value.number}',
+                '${number.value}',
                 style: Theme.of(context).textTheme.headline3,
               ),
             ),

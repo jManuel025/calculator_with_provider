@@ -26,9 +26,9 @@ class NumpadKey extends StatelessWidget {
     };
     Size _size = MediaQuery.of(context).size;
     return Consumer<NumberInputProvider>(
-      builder: (context, value, _) {
+      builder: (context, number, _) {
         return GestureDetector(
-          onTap: () => _writeChar(keyChar, value, type),
+          onTap: () => _writeChar(keyChar, number, type),
           child: Container(
             width:
                 ((_size.width - 48) / (isLarge ? 2 : 4)) - (isLarge ? 32 : 24),
@@ -67,7 +67,7 @@ class NumpadKey extends StatelessWidget {
     );
   }
 
-  void _writeChar(String key, NumberInputProvider value, Type type) {
-    value.number = key;
+  void _writeChar(String key, NumberInputProvider number, Type type) {
+    number.value = key;
   }
 }
